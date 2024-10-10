@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Base64 Image</title>
+</head>
+<body>
+    <h1>Base64 Image from File</h1>
+    <img id="image" alt="Decoded Image" />
+    <pre id="base64Output"></pre>
+
+    <script>
+        // Function to fetch the Base64 string from the text file
+        async function fetchBase64Image() {
+            const response = await fetch('base64_image.txt');
+            if (response.ok) {
+                const base64String = await response.text();
+                // Set the src of the img tag to the Base64 string
+                document.getElementById('image').src = "data:image/png;base64," + base64String;
+                // Display the Base64 string
+                document.getElementById('base64Output').innerText = base64String;
+            } else {
+                console.error('Error fetching Base64 string:', response.statusText);
+            }
+        }
+
+        // Call the function to fetch and display the image
+        fetchBase64Image();
+    </script>
+</body>
+</html>
